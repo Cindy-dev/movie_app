@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/helper/grid_helper.dart';
+import 'package:movie_app/presentation/helper/navigators.dart';
+import 'package:movie_app/presentation/screens/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,6 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Timer.periodic(const Duration(milliseconds: 5 ),(_)=>navigatePush(context, const HomeScreen()));
   }
 
   @override
