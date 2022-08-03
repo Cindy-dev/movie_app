@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/presentation/screens/movie_detail_screen.dart';
 import 'package:movie_app/presentation/screens/splash_screen.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
