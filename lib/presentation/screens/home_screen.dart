@@ -1,14 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:movie_app/data/repository/movie_api.dart';
+import 'package:movie_app/logic/view-model_provider.dart';
+import 'package:movie_app/logic/view_model/popular_movie_vm.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatefulHookConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ref.read(popularMovieNotifierProvider.notifier).getMovie();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,13 +115,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            Container(
-              height: 200,
-              width: 116,
-              margin: const EdgeInsets.fromLTRB(0, 8, 0, 17),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: Colors.white),
-            ),
+            Consumer(builder: (context, ref, child) {
+              final result = ref.watch(popularMovieNotifierProvider);
+
+              if (result is PopularMovieInitial) {
+              } else if (result is PopularMovieLoading) {
+                return const Center(
+                    child: CircularProgressIndicator(
+                  color: Color.fromRGBO(201, 4, 4, 1),
+                ));
+              } else if (result is PopularMovieLoaded) {
+                return Container(
+                    height: 200,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: result.popularMovieModel.results.length,
+                        itemBuilder: (context, i) {
+                          return Container(
+                              height: 200,
+                              width: 116,
+                              margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          'http://image.tmdb.org/t/p/w500/${result.popularMovieModel.results[i].posterPath.toString()}'))));
+                        }));
+              }
+              return Text('List is empty');
+            }),
           ],
         ),
       ),

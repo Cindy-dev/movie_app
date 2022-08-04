@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:movie_app/data/model/popular_movie_model.dart';
 import 'package:movie_app/data/repository/movie_api.dart';
 
 abstract class PopularMovieState {
@@ -14,8 +15,8 @@ class PopularMovieLoading extends PopularMovieState {
 }
 
 class PopularMovieLoaded extends PopularMovieState {
-  final MovieApi movieApi;
-  const PopularMovieLoaded(this.movieApi);
+  final PopularMovieModel popularMovieModel;
+  const PopularMovieLoaded(this.popularMovieModel);
 }
 
 class PopularMovieError extends PopularMovieState {
@@ -24,6 +25,18 @@ class PopularMovieError extends PopularMovieState {
 }
 
 class PopularMovieNotifier extends StateNotifier<PopularMovieState> {
-  PopularMovieNotifier() : super(PopularMovieInitial());
-
+  final Ref ref;
+  PopularMovieNotifier(this.ref) : super(PopularMovieInitial());
+  Future<void> getMovie() async {
+    print('loading');
+    state = PopularMovieLoading();
+    try {
+      final result = await ref.watch(movieApiProvider).getPopularMovie();
+      print('cindy${result.totalResults}');
+      state = PopularMovieLoaded(result);
+    } catch (error) {
+      print(error);
+      state = PopularMovieError(error.toString());
+    }
+  }
 }

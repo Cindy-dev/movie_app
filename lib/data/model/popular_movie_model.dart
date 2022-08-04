@@ -40,9 +40,9 @@ class Result {
   Result({
     required this.adult,
     required this.backdropPath,
-    required this.genreIds,
+    // required this.genreIds,
     required this.id,
-    required this.originalLanguage,
+    // required this.originalLanguage,
     required this.originalTitle,
     required this.overview,
     required this.popularity,
@@ -56,42 +56,42 @@ class Result {
 
   bool adult;
   String backdropPath;
-  List<int> genreIds;
-  int id;
-  OriginalLanguage? originalLanguage;
+  // List<int> genreIds;
+  num id;
+  //OriginalLanguage? originalLanguage;
   String originalTitle;
   String overview;
-  double popularity;
+  num popularity;
   String posterPath;
   DateTime releaseDate;
   String title;
   bool video;
-  double voteAverage;
-  int voteCount;
+  num voteAverage;
+  num voteCount;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        // genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
-        originalLanguage: originalLanguageValues.map[json["original_language"]],
+        //originalLanguage: originalLanguageValues.map[json["original_language"]],
         originalTitle: json["original_title"],
         overview: json["overview"],
-        popularity: json["popularity"].toDouble(),
+        popularity: json["popularity"],
         posterPath: json["poster_path"],
         releaseDate: DateTime.parse(json["release_date"]),
         title: json["title"],
         video: json["video"],
-        voteAverage: json["vote_average"].toDouble(),
+        voteAverage: json["vote_average"],
         voteCount: json["vote_count"],
       );
 
   Map<String, dynamic> toJson() => {
         "adult": adult,
         "backdrop_path": backdropPath,
-        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+        //"genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
         "id": id,
-        "original_language": originalLanguageValues.reverse[originalLanguage],
+        // "original_language": originalLanguageValues.reverse[originalLanguage],
         "original_title": originalTitle,
         "overview": overview,
         "popularity": popularity,
