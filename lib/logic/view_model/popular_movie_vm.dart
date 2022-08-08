@@ -28,11 +28,9 @@ class PopularMovieNotifier extends StateNotifier<PopularMovieState> {
   final Ref ref;
   PopularMovieNotifier(this.ref) : super(PopularMovieInitial());
   Future<void> getMovie() async {
-    print('loading');
     state = PopularMovieLoading();
     try {
       final result = await ref.watch(movieApiProvider).getPopularMovie();
-      print('cindy${result.totalResults}');
       state = PopularMovieLoaded(result);
     } catch (error) {
       print(error);

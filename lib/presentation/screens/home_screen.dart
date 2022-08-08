@@ -28,12 +28,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+        padding: const EdgeInsets.only(left: 10, top: 50),
         alignment: Alignment.topLeft,
-        height: MediaQuery.of(context).size.height,
-        width: double.infinity,
+        height: height,
+        width: width,
         decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -44,65 +46,69 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               Color.fromRGBO(67, 7, 7, 1),
               Color.fromRGBO(0, 0, 0, 1)
             ])),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset(
-                'asset/image/Group 1.png',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Upcoming Movies',
+              style: TextStyle(
+                color: Color.fromRGBO(255, 254, 254, 0.7),
+                fontSize: 25,
+                fontWeight: FontWeight.w400,
               ),
-              const Text(
-                'Welcome, Cindy',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Consumer(builder: (context, ref, child) {
-                final result = ref.watch(upComingMovieNotifierProvider);
+            ),
+            Expanded(
+              child: Center(
+                child: Consumer(builder: (context, ref, child) {
+                  final result = ref.watch(upComingMovieNotifierProvider);
 
-                if (result is UpComingMovieInitial) {
-                } else if (result is UpComingMovieLoading) {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    color: Color.fromRGBO(201, 4, 4, 1),
-                  ));
-                } else if (result is UpComingMovieLoaded) {
-                  return Container(
-                      height: 200,
+                  if (result is UpComingMovieInitial) {
+                  } else if (result is UpComingMovieLoading) {
+                    return const Center(
+                        child: CircularProgressIndicator(
+                      color: Color.fromRGBO(201, 4, 4, 1),
+                    ));
+                  } else if (result is UpComingMovieLoaded) {
+                    return Flexible(
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: result.upComingMovieModel.results.length,
                           itemBuilder: (context, i) {
                             return Container(
-                                height: 200,
+                                height: height * .05,
+                                width: width * .7,
                                 margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.white,
                                     image: DecorationImage(
                                         image: NetworkImage(
-                                            'http://image.tmdb.org/t/p/w500/${result.upComingMovieModel.results[i].backdropPath.toString()}'))));
-                          }));
-                }
-                return Text('No recent movie');
-              }),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Top Rated',
-                    style: TextStyle(
-                      color: Color.fromRGBO(255, 254, 254, 0.7),
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                    ),
+                                            'http://image.tmdb.org/t/p/w500/${result.upComingMovieModel.results[i].posterPath.toString()}'),
+                                        fit: BoxFit.cover)));
+                          }),
+                    );
+                  }
+                  return Text('No recent movie');
+                }),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Top Rated',
+                  style: TextStyle(
+                    color: Color.fromRGBO(255, 254, 254, 0.7),
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
                   ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: const Text(
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
                       'See all >',
                       style: TextStyle(
                         color: Color.fromRGBO(255, 254, 254, 0.7),
@@ -111,52 +117,60 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                     ),
                   ),
-                ],
-              ),
-              Consumer(builder: (context, ref, child) {
-                final result = ref.watch(topRatedMovieNotifierProvider);
+                ),
+              ],
+            ),
+            Expanded(
+              child: Center(
+                child: Consumer(builder: (context, ref, child) {
+                  final result = ref.watch(topRatedMovieNotifierProvider);
 
-                if (result is TopRatedMovieInitial) {
-                } else if (result is TopRatedMovieLoading) {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    color: Color.fromRGBO(201, 4, 4, 1),
-                  ));
-                } else if (result is TopRatedMovieLoaded) {
-                  return Container(
-                      height: 200,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: result.topRatedMovieModel.results.length,
-                          itemBuilder: (context, i) {
-                            return Container(
-                                height: 200,
-                                width: 116,
-                                margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            'http://image.tmdb.org/t/p/w500/${result.topRatedMovieModel.results[i].posterPath.toString()}'))));
-                          }));
-                }
-                return Text('List is empty');
-              }),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Popular',
-                    style: TextStyle(
-                      color: Color.fromRGBO(255, 254, 254, 0.7),
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  if (result is TopRatedMovieInitial) {
+                  } else if (result is TopRatedMovieLoading) {
+                    return const Center(
+                        child: CircularProgressIndicator(
+                      color: Color.fromRGBO(201, 4, 4, 1),
+                    ));
+                  } else if (result is TopRatedMovieLoaded) {
+                    return Container(
+                        height: 200,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: result.topRatedMovieModel.results.length,
+                            itemBuilder: (context, i) {
+                              return Container(
+                                  height: 200,
+                                  width: 116,
+                                  margin:
+                                      const EdgeInsets.fromLTRB(0, 8, 10, 17),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              'http://image.tmdb.org/t/p/w500/${result.topRatedMovieModel.results[i].posterPath.toString()}'))));
+                            }));
+                  }
+                  return Text('List is empty');
+                }),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Popular',
+                  style: TextStyle(
+                    color: Color.fromRGBO(255, 254, 254, 0.7),
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
                   ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: const Text(
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
                       'See all >',
                       style: TextStyle(
                         color: Color.fromRGBO(255, 254, 254, 0.7),
@@ -165,40 +179,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                     ),
                   ),
-                ],
-              ),
-              Consumer(builder: (context, ref, child) {
-                final result = ref.watch(popularMovieNotifierProvider);
+                ),
+              ],
+            ),
+            Expanded(
+              child: Center(
+                child: Consumer(builder: (context, ref, child) {
+                  final result = ref.watch(popularMovieNotifierProvider);
 
-                if (result is PopularMovieInitial) {
-                } else if (result is PopularMovieLoading) {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    color: Color.fromRGBO(201, 4, 4, 1),
-                  ));
-                } else if (result is PopularMovieLoaded) {
-                  return Container(
-                      height: 200,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: result.popularMovieModel.results.length,
-                          itemBuilder: (context, i) {
-                            return Container(
-                                height: 200,
-                                width: 116,
-                                margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            'http://image.tmdb.org/t/p/w500/${result.popularMovieModel.results[i].posterPath.toString()}'))));
-                          }));
-                }
-                return Text('List is empty');
-              }),
-            ],
-          ),
+                  if (result is PopularMovieInitial) {
+                  } else if (result is PopularMovieLoading) {
+                    return const Center(
+                        child: CircularProgressIndicator(
+                      color: Color.fromRGBO(201, 4, 4, 1),
+                    ));
+                  } else if (result is PopularMovieLoaded) {
+                    return Container(
+                        height: 200,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: result.popularMovieModel.results.length,
+                            itemBuilder: (context, i) {
+                              return Container(
+                                  height: 200,
+                                  width: 116,
+                                  margin:
+                                      const EdgeInsets.fromLTRB(0, 8, 10, 17),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              'http://image.tmdb.org/t/p/w500/${result.popularMovieModel.results[i].posterPath.toString()}'))));
+                            }));
+                  }
+                  return Text('List is empty');
+                }),
+              ),
+            ),
+          ],
         ),
       ),
     );

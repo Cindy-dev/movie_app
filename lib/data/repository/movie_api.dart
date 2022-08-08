@@ -17,7 +17,6 @@ class MovieApi {
     var dio = Dio();
     try {
       final response = await dio.get(url);
-      logger.wtf(response.data);
 
       final popularMovieModel = PopularMovieModel.fromJson(response.data);
       return popularMovieModel;
@@ -33,7 +32,6 @@ class MovieApi {
     var dio = Dio();
     try {
       final response = await dio.get(url);
-      logger.wtf(response.data);
 
       final topRatedMovieModel = TopRatedMovieModel.fromJson(response.data);
       return topRatedMovieModel;
@@ -49,8 +47,6 @@ class MovieApi {
     var dio = Dio();
     try {
       final response = await dio.get(url);
-      logger.wtf(response.data);
-
       final upcomingMovieModel = UpComingMovieModel.fromJson(response.data);
       return upcomingMovieModel;
     } catch (error) {

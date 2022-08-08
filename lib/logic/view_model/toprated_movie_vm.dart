@@ -29,11 +29,9 @@ class TopRatedMovieNotifier extends StateNotifier<TopRatedMovieState> {
   final Ref ref;
   TopRatedMovieNotifier(this.ref) : super(TopRatedMovieInitial());
   Future<void> getMovie() async {
-    print('loading');
     state = TopRatedMovieLoading();
     try {
       final result = await ref.watch(movieApiProvider).getTopRatedMovie();
-      print('cindy${result.totalResults}');
       state = TopRatedMovieLoaded(result);
     } catch (error) {
       print(error);
