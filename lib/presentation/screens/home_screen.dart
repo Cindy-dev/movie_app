@@ -58,6 +58,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
             Expanded(
+              flex: 2,
               child: Center(
                 child: Consumer(builder: (context, ref, child) {
                   final result = ref.watch(upComingMovieNotifierProvider);
@@ -69,25 +70,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       color: Color.fromRGBO(201, 4, 4, 1),
                     ));
                   } else if (result is UpComingMovieLoaded) {
-                    return Flexible(
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: result.upComingMovieModel.results.length,
-                          itemBuilder: (context, i) {
-                            return Container(
-                                height: height * .05,
-                                width: width * .7,
-                                margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            'http://image.tmdb.org/t/p/w500/${result.upComingMovieModel.results[i].posterPath.toString()}'),
-                                        fit: BoxFit.cover)));
-                          }),
-                    );
+                    return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: result.upComingMovieModel.results.length,
+                        itemBuilder: (context, i) {
+                          return Container(
+                              height: height * .05,
+                              width: width * .7,
+                              margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          'http://image.tmdb.org/t/p/w500/${result.upComingMovieModel.results[i].posterPath.toString()}'),
+                                      fit: BoxFit.cover)));
+                        });
                   }
                   return Text('No recent movie');
                 }),
@@ -148,7 +147,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       color: Colors.white,
                                       image: DecorationImage(
                                           image: NetworkImage(
-                                              'http://image.tmdb.org/t/p/w500/${result.topRatedMovieModel.results[i].posterPath.toString()}'))));
+                                            'http://image.tmdb.org/t/p/w500/${result.topRatedMovieModel.results[i].posterPath.toString()}',
+                                          ),
+                                          fit: BoxFit.cover)));
                             }));
                   }
                   return Text('List is empty');
@@ -209,8 +210,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.white,
                                       image: DecorationImage(
-                                          image: NetworkImage(
-                                              'http://image.tmdb.org/t/p/w500/${result.popularMovieModel.results[i].posterPath.toString()}'))));
+                                        image: NetworkImage(
+                                            'http://image.tmdb.org/t/p/w500/${result.popularMovieModel.results[i].posterPath.toString()}'),
+                                        fit: BoxFit.cover,
+                                      )));
                             }));
                   }
                   return Text('List is empty');
