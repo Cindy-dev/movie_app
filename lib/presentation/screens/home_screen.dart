@@ -45,19 +45,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               Color.fromRGBO(0, 0, 0, 1),
               Color.fromRGBO(67, 7, 7, 1),
               Color.fromRGBO(0, 0, 0, 1)
-
-                  // Color.fromRGBO(201, 4, 4, 1),
-                  // Color.fromRGBO(0, 0, 0, 1),
-                  // Color.fromRGBO(67, 7, 7, 1),
-                  // Color.fromRGBO(0, 0, 0, 1)
-                  // Color.fromRGBO(201, 4, 4, 1),
-                  // Color.fromRGBO(0, 0, 0, 1),
-                  // Color.fromRGBO(67, 7, 7, 1),
-                  // Color.fromRGBO(0, 0, 0, 1)
-                  // Color.fromRGBO(201, 4, 4, 1),
-                  // Color.fromRGBO(0, 0, 0, 1),
-                  // Color.fromRGBO(67, 7, 7, 1),
-                  // Color.fromRGBO(0, 0, 0, 1)
             ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
