@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/data/model/upcoming_movie_model.dart';
 import 'package:movie_app/presentation/helper/movie_detail_helper.dart';
 
 class MovieDetailScreen extends StatefulWidget {
-  const MovieDetailScreen({Key? key}) : super(key: key);
+ final  Result result;
+  const MovieDetailScreen({Key? key, required this.result}) : super(key: key);
 
   @override
   State<MovieDetailScreen> createState() => _MovieDetailScreenState();
@@ -41,9 +43,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         bottomRight: Radius.circular(12),
                         bottomLeft: Radius.circular(12))),
               ),
-              const Text(
-                'Black Widow',
-                style: TextStyle(
+              Text(
+                widget.result.originalTitle,
+                style: const TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.w400,
                     color: Color(0xffEF5050)),

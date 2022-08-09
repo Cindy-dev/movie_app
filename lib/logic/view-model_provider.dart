@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/data/model/popular_movie_model.dart';
-import 'package:movie_app/logic/view_model/latest_movie_vm.dart';
+import 'package:movie_app/logic/view_model/upcoming_movie_vm.dart';
 import 'package:movie_app/logic/view_model/popular_movie_vm.dart';
 import 'package:movie_app/logic/view_model/toprated_movie_vm.dart';
 

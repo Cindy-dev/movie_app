@@ -4,9 +4,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_app/data/repository/movie_api.dart';
 import 'package:movie_app/logic/view-model_provider.dart';
 import 'package:movie_app/logic/view_model/popular_movie_vm.dart';
+import 'package:movie_app/presentation/helper/navigators.dart';
+import 'package:movie_app/presentation/screens/movie_detail_screen.dart';
 import '../../data/model/toprated_movie_model.dart';
 import '../../data/model/upcoming_movie_model.dart';
-import '../../logic/view_model/latest_movie_vm.dart';
+import '../../logic/view_model/upcoming_movie_vm.dart';
 import '../../logic/view_model/toprated_movie_vm.dart';
 
 class HomeScreen extends StatefulHookConsumerWidget {
@@ -74,18 +76,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         itemCount: result.upComingMovieModel.results.length,
                         itemBuilder: (context, i) {
-                          return Container(
-                              height: height * .05,
-                              width: width * .7,
-                              margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          'http://image.tmdb.org/t/p/w500/${result.upComingMovieModel.results[i].posterPath.toString()}'),
-                                      fit: BoxFit.cover)));
+                          return GestureDetector(
+                            onTap: (){navigatePush(context, MovieDetailScreen(result: result.upComingMovieModel.results[i]));},
+                            child: Container(
+                                height: height * .05,
+                                width: width * .7,
+                                margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            'http://image.tmdb.org/t/p/w500/${result.upComingMovieModel.results[i].posterPath.toString()}'),
+                                        fit: BoxFit.cover))),
+                          );
                         });
                   }
                   return Text('No recent movie');

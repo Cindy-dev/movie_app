@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/presentation/helper/grid_helper.dart';
 import 'package:movie_app/presentation/helper/navigators.dart';
@@ -19,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(const Duration(seconds: 5),
-            () => navigatePush(context, const HomeScreen()));
+            () => navigatePush(context,  HomeScreen()));
   }
 
 
