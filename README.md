@@ -7,8 +7,8 @@ A new Flutter project.
 This project is a starting point for a Flutter application.
 
 <p align="center">
-  <img src="screenshots\Simulator Screen Shot - iPhone 13 Pro Max - 2022-08-10 at 22.56.16.png" width="350" title="Home Screen for ios">
-  <img src="asset\screenshots\Screenshot 2022-08-10 at 11.10.15 PM.png" width="350" alt="Home Screen for android">
+  <img src="screenshots/ios.png" width="350" title="Home Screen for ios">
+  <img src="screenshots/android.png" width="350" alt="Home Screen for android">
 </p>
 
 A few resources to get you started if this is your first Flutter project:
