@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/presentation/helper/animation.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shimmer/shimmer.dart';
-
 import '../../logic/view-model_provider.dart';
 import '../../logic/view_model/upcoming_movie_vm.dart';
 import '../helper/navigators.dart';
