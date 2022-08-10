@@ -14,15 +14,13 @@ class UpcomingMoviesWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-
     final upcomingViewModel = ref.watch(upComingMovieNotifierProvider);
-
     final readupcomingViewModel =
-    ref.read(upComingMovieNotifierProvider.notifier);
+        ref.read(upComingMovieNotifierProvider.notifier);
     return Expanded(
       flex: 2,
       child: Center(
-        child: Consumer(builder: (context, ref, child) {
+        child: Builder(builder: (context) {
           if (upcomingViewModel is UpComingMovieInitial) {
           } else if (upcomingViewModel is UpComingMovieLoading) {
             return const Center(
@@ -39,7 +37,15 @@ class UpcomingMoviesWidget extends ConsumerWidget {
                       navigatePush(
                           context,
                           MovieDetailScreen(
-                              result: upcomingViewModel.upComingMovieModel.results[i]));
+                            backdropPath: upcomingViewModel
+                                .upComingMovieModel.results[i].backdropPath,
+                            voteAverage: upcomingViewModel
+                                .upComingMovieModel.results[i].voteAverage,
+                            originalTitle: upcomingViewModel
+                                .upComingMovieModel.results[i].originalTitle,
+                            overview: upcomingViewModel
+                                .upComingMovieModel.results[i].overview,
+                          ));
                     },
                     child: Container(
                         height: height * .05,

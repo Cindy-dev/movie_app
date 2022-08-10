@@ -10,7 +10,6 @@ import 'package:movie_app/data/model/toprated_movie_model.dart';
 
 class MovieApi {
   Future<PopularMovieModel> getPopularMovie() async {
-    //final PopularMovieModel popularMovieModel;
     Logger logger = Logger();
     const url =
         'http://api.themoviedb.org/3/movie/popular?api_key=dec4ade0a55a7b54f6f93b20b043de03';
@@ -53,8 +52,6 @@ class MovieApi {
       throw error;
     }
   }
-
-
 }
 
 final movieApiProvider = Provider((ref) => MovieApi());

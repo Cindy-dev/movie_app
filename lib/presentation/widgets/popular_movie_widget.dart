@@ -7,18 +7,17 @@ import 'package:movie_app/presentation/screens/movie_detail_screen.dart';
 import '../../logic/view-model_provider.dart';
 import '../../logic/view_model/popular_movie_vm.dart';
 
+//map the data by creating a detail model
+
 class PopularMovieWidget extends ConsumerWidget {
   const PopularMovieWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final popularViewModel = ref.watch(popularMovieNotifierProvider);
-
-    final readPopularViewModel =
-        ref.read(popularMovieNotifierProvider.notifier);
     return Expanded(
       child: Center(
-        child: Consumer(builder: (context, ref, child) {
+        child: Builder(builder: (context) {
           if (popularViewModel is PopularMovieInitial) {
           } else if (popularViewModel is PopularMovieLoading) {
             return const Center(
@@ -30,14 +29,23 @@ class PopularMovieWidget extends ConsumerWidget {
                 height: 200,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: popularViewModel.popularMovieModel.results.length,
+                    itemCount:
+                        popularViewModel.popularMovieModel.results.length,
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         onTap: () {
                           navigatePush(
                               context,
                               MovieDetailScreen(
-                                  result: popularViewModel.popularMovieModel.results[i]);
+                                backdropPath: popularViewModel
+                                    .popularMovieModel.results[i].backdropPath,
+                                voteAverage: popularViewModel
+                                    .popularMovieModel.results[i].voteAverage,
+                                originalTitle: popularViewModel
+                                    .popularMovieModel.results[i].originalTitle,
+                                overview: popularViewModel
+                                    .popularMovieModel.results[i].overview,
+                              ));
                         },
                         child: Container(
                             height: 200,

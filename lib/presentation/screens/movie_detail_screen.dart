@@ -1,12 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/data/model/upcoming_movie_model.dart';
 import 'package:movie_app/presentation/helper/movie_detail_helper.dart';
 import 'package:movie_app/presentation/helper/navigators.dart';
 
 class MovieDetailScreen extends StatefulWidget {
-  final Result result;
-  const MovieDetailScreen({Key? key, required this.result}) : super(key: key);
+  final String overview;
+  final num voteAverage;
+  final String originalTitle;
+  final String backdropPath;
+  const MovieDetailScreen(
+      {Key? key,
+      required this.overview,
+      required this.voteAverage,
+      required this.originalTitle,
+      required this.backdropPath,
+      })
+      : super(key: key);
 
   @override
   State<MovieDetailScreen> createState() => _MovieDetailScreenState();
@@ -42,7 +51,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
-                                'http://image.tmdb.org/t/p/w500/${widget.result.backdropPath.toString()}'),
+                                'http://image.tmdb.org/t/p/w500/${widget.backdropPath}'),
                             fit: BoxFit.fill),
                         color: Colors.white,
                         borderRadius: const BorderRadius.only(
@@ -61,7 +70,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 ],
               ),
               Text(
-                widget.result.originalTitle,
+                widget.originalTitle,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     fontSize: 35,
@@ -69,7 +78,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     color: Color(0xffEF5050)),
               ),
               // movieProducerRow(widget.result.),
-              movieRatingStar(widget.result.voteAverage),
+              movieRatingStar(widget.voteAverage),
               movieDetailRow(),
               Row(
                 children: [
@@ -78,7 +87,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     padding: const EdgeInsets.only(
                         top: 20, bottom: 20, left: 10, right: 10),
                     child: Text(
-                      widget.result.overview.toString(),
+                      widget.overview.toString(),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontSize: 10.5,

@@ -2,12 +2,6 @@
 
 import 'dart:convert';
 
-UpComingMovieModel upComingMovieModelFromJson(String str) =>
-    UpComingMovieModel.fromJson(json.decode(str));
-
-String upComingMovieModelToJson(UpComingMovieModel data) =>
-    json.encode(data.toJson());
-
 class UpComingMovieModel {
   UpComingMovieModel({
     required this.dates,

@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:movie_app/data/repository/movie_api.dart';
 import 'package:movie_app/logic/view-model_provider.dart';
-import 'package:movie_app/logic/view_model/popular_movie_vm.dart';
-import 'package:movie_app/presentation/helper/navigators.dart';
-import 'package:movie_app/presentation/screens/movie_detail_screen.dart';
 import 'package:movie_app/presentation/widgets/popular_movie_widget.dart';
 import 'package:movie_app/presentation/widgets/toprated_movie_widget.dart';
 import 'package:movie_app/presentation/widgets/upcoming_movies_widget.dart';
-import '../../data/model/toprated_movie_model.dart';
-import '../../data/model/upcoming_movie_model.dart';
-import '../../logic/view_model/upcoming_movie_vm.dart';
-import '../../logic/view_model/toprated_movie_vm.dart';
 
 class HomeScreen extends StatefulHookConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
