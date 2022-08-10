@@ -63,7 +63,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       left: 15,
                       child: IconButton(
                           onPressed: () => navigatePop(context),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back_ios,
                             color: Colors.white,
                           ))),

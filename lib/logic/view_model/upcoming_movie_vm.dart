@@ -3,27 +3,25 @@ import 'package:movie_app/data/model/upcoming_movie_model.dart';
 
 import '../../data/repository/movie_api.dart';
 
-abstract class UpComingMovieState{
+abstract class UpComingMovieState {
   const UpComingMovieState();
 }
 
-class UpComingMovieInitial extends UpComingMovieState{
+class UpComingMovieInitial extends UpComingMovieState {
   const UpComingMovieInitial();
 }
 
-
-class UpComingMovieLoading extends UpComingMovieState{
+class UpComingMovieLoading extends UpComingMovieState {
   const UpComingMovieLoading();
 }
 
-
-class UpComingMovieLoaded extends UpComingMovieState{
+class UpComingMovieLoaded extends UpComingMovieState {
+  bool enabled = true;
   final UpComingMovieModel upComingMovieModel;
-  const UpComingMovieLoaded(this.upComingMovieModel);
+  UpComingMovieLoaded(this.upComingMovieModel);
 }
 
-
-class UpComingMovieError extends UpComingMovieState{
+class UpComingMovieError extends UpComingMovieState {
   final String error;
   const UpComingMovieError(this.error);
 }

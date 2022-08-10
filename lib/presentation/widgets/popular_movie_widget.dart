@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/presentation/helper/navigators.dart';
 import 'package:movie_app/presentation/screens/movie_detail_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../../logic/view-model_provider.dart';
 import '../../logic/view_model/popular_movie_vm.dart';
+import '../helper/animation.dart';
 
 //map the data by creating a detail model
 
@@ -20,10 +22,7 @@ class PopularMovieWidget extends ConsumerWidget {
         child: Builder(builder: (context) {
           if (popularViewModel is PopularMovieInitial) {
           } else if (popularViewModel is PopularMovieLoading) {
-            return const Center(
-                child: CircularProgressIndicator(
-              color: Color.fromRGBO(201, 4, 4, 1),
-            ));
+            return circleProgress();
           } else if (popularViewModel is PopularMovieLoaded) {
             return Container(
                 height: 200,
@@ -34,8 +33,9 @@ class PopularMovieWidget extends ConsumerWidget {
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         onTap: () {
-                          navigatePush(
+                          navigateWithAnimation(
                               context,
+                              PageTransitionType.rightToLeft,
                               MovieDetailScreen(
                                 backdropPath: popularViewModel
                                     .popularMovieModel.results[i].backdropPath,

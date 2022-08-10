@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../../logic/view-model_provider.dart';
 import '../../logic/view_model/toprated_movie_vm.dart';
+import '../helper/animation.dart';
 import '../helper/navigators.dart';
 import '../screens/movie_detail_screen.dart';
 
@@ -19,10 +21,7 @@ class TopRatedMoviesWidget extends ConsumerWidget {
 
           if (result is TopRatedMovieInitial) {
           } else if (result is TopRatedMovieLoading) {
-            return const Center(
-                child: CircularProgressIndicator(
-              color: Color.fromRGBO(201, 4, 4, 1),
-            ));
+            return circleProgress();
           } else if (result is TopRatedMovieLoaded) {
             return Container(
                 height: 200,
@@ -32,8 +31,9 @@ class TopRatedMoviesWidget extends ConsumerWidget {
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         onTap: () {
-                          navigatePush(
+                          navigateWithAnimation(
                               context,
+                              PageTransitionType.leftToRight,
                               MovieDetailScreen(
                                 backdropPath: result
                                     .topRatedMovieModel.results[i].backdropPath,
