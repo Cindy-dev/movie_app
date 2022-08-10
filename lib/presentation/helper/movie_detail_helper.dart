@@ -65,29 +65,29 @@ movieDetailRow() {
   );
 }
 
-movieProducerRow() {
-  return const Padding(
-      padding: EdgeInsets.only(bottom: 8),
+movieProducerRow(String name) {
+  return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
       child: Text(
-        'Marvel Studios - Black Widow',
-        style: TextStyle(
+        name,
+        style: const TextStyle(
             color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w500),
       ));
 }
 
-movieRatingStar() {
+movieRatingStar(num vote) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 29),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Icon(
+      children:  [
+       const  Icon(
           Icons.star,
           color: Colors.redAccent,
         ),
         Text(
-          '4.8/5',
-          style: TextStyle(
+         vote.toString() ,
+          style: const TextStyle(
               color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w300),
         )
       ],
