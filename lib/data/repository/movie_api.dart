@@ -15,7 +15,7 @@ class MovieApi {
   Future<PopularMovieModel> getPopularMovie() async {
     Logger logger = Logger();
     const url =
-        'http://api.themoviedb.org/3/movie/popular?api_key=dec4ade0a55a7b54f6f93b20b043de03';
+        'http://api.themoviedb.org/3/movie/popular?api_key=';
     var dio = Dio();
     try {
       final response = await dio.get(url);
@@ -30,7 +30,7 @@ class MovieApi {
   Future<TopRatedMovieModel> getTopRatedMovie() async {
     Logger logger = Logger();
     const url =
-        'https://api.themoviedb.org/3/movie/top_rated?api_key=dec4ade0a55a7b54f6f93b20b043de03';
+        'https://api.themoviedb.org/3/movie/top_rated?api_key=';
     var dio = Dio();
     try {
       final response = await dio.get(url);
@@ -44,7 +44,7 @@ class MovieApi {
   Future<UpComingMovieModel> getUpcomingMovie() async {
     Logger logger = Logger();
     const url =
-        'https://api.themoviedb.org/3/movie/upcoming?api_key=dec4ade0a55a7b54f6f93b20b043de03&language=en-US';
+        'https://api.themoviedb.org/3/movie/upcoming?api_key=&language=en-US';
     var dio = Dio();
     try {
       final response = await dio.get(url);
@@ -57,7 +57,7 @@ class MovieApi {
 
   Future<MovieCastModel> getMovieCast(int id) async {
     String url =
-        'https://api.themoviedb.org/3/movie/${id}/credits?api_key=dec4ade0a55a7b54f6f93b20b043de03';
+        'https://api.themoviedb.org/3/movie/${id}/credits?api_key=';
     var dio = Dio();
     try {
       final response = await dio.get(url);
@@ -72,7 +72,7 @@ class MovieApi {
 
   Future<MovieReleaseDateModel> getMovieReleaseDate(int id) async {
     String url =
-        'https://api.themoviedb.org/3/movie/$id?api_key=dec4ade0a55a7b54f6f93b20b043de03';
+        'https://api.themoviedb.org/3/movie/$id?api_key=';
     var dio = Dio();
     try {
       final response = await dio.get(url);
