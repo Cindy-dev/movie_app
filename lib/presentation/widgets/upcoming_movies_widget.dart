@@ -13,12 +13,9 @@ class UpcomingMoviesWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final upcomingViewModel = ref.watch(upComingMovieNotifierProvider);
-    final readupcomingViewModel =
-        ref.read(upComingMovieNotifierProvider.notifier);
     return Expanded(
       flex: 2,
       child: Center(
@@ -27,44 +24,43 @@ class UpcomingMoviesWidget extends ConsumerWidget {
           } else if (upcomingViewModel is UpComingMovieLoading) {
             return circleProgress();
           } else if (upcomingViewModel is UpComingMovieLoaded) {
-            return  ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount:
-                      upcomingViewModel.upComingMovieModel.results.length,
-                  itemBuilder: (context, i) {
-                    return GestureDetector(
-                      onTap: () {
-                        navigateWithAnimation(
-                            context,
-                            PageTransitionType.bottomToTop,
-                            MovieDetailScreen(
-                              backdropPath: upcomingViewModel
-                                  .upComingMovieModel.results[i].backdropPath,
-                              voteAverage: upcomingViewModel
-                                  .upComingMovieModel.results[i].voteAverage,
-                              originalTitle: upcomingViewModel
-                                  .upComingMovieModel.results[i].originalTitle,
-                              overview: upcomingViewModel
-                                  .upComingMovieModel.results[i].overview,
-                            ));
-                      },
-                      child: Container(
-                          height: height * .05,
-                          width: width * .7,
-                          margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      'http://image.tmdb.org/t/p/w500/${upcomingViewModel.upComingMovieModel.results[i].posterPath.toString()}'),
-                                  fit: BoxFit.cover))),
-                    );
-                  }
-            );
+            return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: upcomingViewModel.upComingMovieModel.results.length,
+                itemBuilder: (context, i) {
+                  return GestureDetector(
+                    onTap: () {
+                      navigateWithAnimation(
+                          context,
+                          PageTransitionType.bottomToTop,
+                          MovieDetailScreen(
+                            backdropPath: upcomingViewModel
+                                .upComingMovieModel.results[i].backdropPath,
+                            voteAverage: upcomingViewModel
+                                .upComingMovieModel.results[i].voteAverage,
+                            originalTitle: upcomingViewModel
+                                .upComingMovieModel.results[i].originalTitle,
+                            overview: upcomingViewModel
+                                .upComingMovieModel.results[i].overview,
+                          ));
+                    },
+                    child: Container(
+                        height: height * .05,
+                        width: width * .7,
+                        margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white60,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    'http://image.tmdb.org/t/p/w500/${upcomingViewModel.upComingMovieModel.results[i].posterPath.toString()}'),
+                                fit: BoxFit.cover))),
+                  );
+                });
           }
-          return const Text('No recent movie');
+          return const Text('No recent movie',
+              style: TextStyle(color: Colors.white, fontSize: 20));
         }),
       ),
     );

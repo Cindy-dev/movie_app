@@ -8,14 +8,13 @@ class MovieDetailScreen extends StatefulWidget {
   final num voteAverage;
   final String originalTitle;
   final String backdropPath;
-  const MovieDetailScreen(
-      {Key? key,
-      required this.overview,
-      required this.voteAverage,
-      required this.originalTitle,
-      required this.backdropPath,
-      })
-      : super(key: key);
+  const MovieDetailScreen({
+    Key? key,
+    required this.overview,
+    required this.voteAverage,
+    required this.originalTitle,
+    required this.backdropPath,
+  }) : super(key: key);
 
   @override
   State<MovieDetailScreen> createState() => _MovieDetailScreenState();

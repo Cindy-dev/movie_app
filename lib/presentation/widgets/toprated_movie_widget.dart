@@ -27,7 +27,9 @@ class TopRatedMoviesWidget extends ConsumerWidget {
                 height: 200,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: result.topRatedMovieModel.results.length,
+                    itemCount: result.topRatedMovieModel.results.length > 5
+                        ? 10
+                        : result.topRatedMovieModel.results.length,
                     itemBuilder: (context, i) {
                       return GestureDetector(
                         onTap: () {
@@ -51,7 +53,7 @@ class TopRatedMoviesWidget extends ConsumerWidget {
                             margin: const EdgeInsets.fromLTRB(0, 8, 10, 17),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
+                                color: Colors.white60,
                                 image: DecorationImage(
                                     image: NetworkImage(
                                       'http://image.tmdb.org/t/p/w500/${result.topRatedMovieModel.results[i].posterPath.toString()}',
@@ -60,7 +62,8 @@ class TopRatedMoviesWidget extends ConsumerWidget {
                       );
                     }));
           }
-          return const Text('List is empty');
+          return const Text('List is empty',
+              style: TextStyle(color: Colors.white, fontSize: 20));
         }),
       ),
     );

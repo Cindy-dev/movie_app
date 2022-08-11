@@ -16,10 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(const Duration(seconds: 5),
-            () => navigatePush(context,  HomeScreen()));
+    Timer(
+        const Duration(seconds: 5), () => navigatePush(context, HomeScreen()));
   }
-
 
   @override
   Widget build(BuildContext context) {

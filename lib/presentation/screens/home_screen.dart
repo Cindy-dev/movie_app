@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_app/logic/view-model_provider.dart';
+import 'package:movie_app/presentation/helper/navigators.dart';
+import 'package:movie_app/presentation/screens/popular_view_more_list.dart';
+import 'package:movie_app/presentation/screens/view_more_list.dart';
 import 'package:movie_app/presentation/widgets/popular_movie_widget.dart';
 import 'package:movie_app/presentation/widgets/toprated_movie_widget.dart';
 import 'package:movie_app/presentation/widgets/upcoming_movies_widget.dart';
+import 'package:page_transition/page_transition.dart';
 
 class HomeScreen extends StatefulHookConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -67,7 +71,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    navigateWithAnimation(
+                        context,
+                        PageTransitionType.topToBottom,
+                        const TopRatedViewMoreScreen());
+                  },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
@@ -95,7 +104,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    navigateWithAnimation(
+                        context,
+                        PageTransitionType.topToBottom,
+                        const PopularViewMoreScreen());
+                  },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
