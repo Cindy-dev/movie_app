@@ -66,7 +66,7 @@ class PopularMovieWidget extends ConsumerWidget {
                       );
                     }));
           }
-          return const Text('List is empty',
+          return const Text('Unable to load popular movies',
               style: TextStyle(color: Colors.white, fontSize: 20));
         }),
       ),

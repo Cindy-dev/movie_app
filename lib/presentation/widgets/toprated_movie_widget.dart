@@ -63,7 +63,7 @@ class TopRatedMoviesWidget extends ConsumerWidget {
                       );
                     }));
           }
-          return const Text('List is empty',
+          return const Text('Unable to load top rated movies',
               style: TextStyle(color: Colors.white, fontSize: 20));
         }),
       ),

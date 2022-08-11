@@ -61,7 +61,7 @@ class UpcomingMoviesWidget extends ConsumerWidget {
                   );
                 });
           }
-          return const Text('No recent movie',
+          return const Text('Unable to load upcoming movies',
               style: TextStyle(color: Colors.white, fontSize: 20));
         }),
       ),

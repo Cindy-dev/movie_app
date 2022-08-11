@@ -50,6 +50,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+                alignment: Alignment.centerRight,
+                margin: const EdgeInsets.only(right: 10),
+                child: IconButton(
+                    onPressed: () {
+                      ref.read(popularMovieNotifierProvider.notifier).getMovie();
+                      ref.read(topRatedMovieNotifierProvider.notifier).getMovie();
+                      ref.read(upComingMovieNotifierProvider.notifier).getMovie();
+                    },
+                    icon: const Icon(
+                      Icons.refresh,
+                      color: Color.fromRGBO(255, 254, 254, 0.7),
+                    ))),
             const Text(
               'Upcoming Movies',
               style: TextStyle(
