@@ -25,13 +25,16 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
         backgroundColor: Colors.black,
         body: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          fit: StackFit.expand,
           children: [
             gridHelper(),
             Positioned(
-              bottom: 0,
+              bottom: 30,
               left: 100,
               right: 100,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const Text(
                     'Unlimited entertainment',
@@ -41,10 +44,11 @@ class _SplashScreenState extends State<SplashScreen> {
                         fontSize: 25,
                         fontWeight: FontWeight.w700),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Image.asset('asset/image/Ellipse 1.png')
+                  Image.asset('asset/image/Ellipse 1.png'),
+
                 ],
               ),
             ),
