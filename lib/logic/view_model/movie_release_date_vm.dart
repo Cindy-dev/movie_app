@@ -18,6 +18,12 @@ class MovieReleaseLoaded extends MovieReleaseState {
   final MovieReleaseDateModel movieReleaseDateModel;
   late List<String> date;
   MovieReleaseLoaded(this.movieReleaseDateModel, this.date);
+
+  String durationToString() {
+    var d = Duration(minutes: movieReleaseDateModel.runtime);
+    List<String> parts = d.toString().split(':');
+    return '${parts[0].padLeft(2, '0')}:${parts[1].padLeft(2, '0')}';
+  }
 }
 
 class MovieReleaseError extends MovieReleaseState {

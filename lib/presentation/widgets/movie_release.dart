@@ -27,8 +27,7 @@ class MovieReleaseWidget extends ConsumerWidget {
                 children: [
                   detailContainer('${vote.toString()} / 10'),
                   detailContainer(releaseViewModel.date[0]),
-                  detailContainer(
-                      releaseViewModel.movieReleaseDateModel.runtime.toString())
+                  detailContainer('${releaseViewModel.durationToString()} hrs')
                 ],
               ),
             ),
