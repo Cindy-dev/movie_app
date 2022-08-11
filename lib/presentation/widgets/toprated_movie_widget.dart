@@ -45,6 +45,7 @@ class TopRatedMoviesWidget extends ConsumerWidget {
                                     .results[i].originalTitle,
                                 overview: result
                                     .topRatedMovieModel.results[i].overview,
+                                id: result.topRatedMovieModel.results[i].id,
                               ));
                         },
                         child: Container(

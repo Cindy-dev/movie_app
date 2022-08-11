@@ -48,6 +48,8 @@ class PopularViewMoreScreen extends ConsumerWidget {
                               .popularMovieModel.results[i].originalTitle,
                           overview: popularViewModel
                               .popularMovieModel.results[i].overview,
+                          id: popularViewModel.popularMovieModel.results[i].id
+                              .toInt(),
                         ));
                   },
                   child: Card(

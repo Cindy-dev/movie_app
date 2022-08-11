@@ -42,6 +42,8 @@ class UpcomingMoviesWidget extends ConsumerWidget {
                                 .upComingMovieModel.results[i].originalTitle,
                             overview: upcomingViewModel
                                 .upComingMovieModel.results[i].overview,
+                            id: upcomingViewModel
+                                .upComingMovieModel.results[i].id,
                           ));
                     },
                     child: Container(

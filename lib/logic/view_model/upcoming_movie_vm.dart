@@ -32,7 +32,7 @@ class UpComingMovieNotifier extends StateNotifier<UpComingMovieState> {
   Future<void> getMovie() async {
     state = UpComingMovieLoading();
     try {
-      final result = await ref.watch(movieApiProvider).getUpcomingMovie();
+      final result = await ref.read(movieApiProvider).getUpcomingMovie();
       state = UpComingMovieLoaded(result);
     } catch (error) {
       print(error);

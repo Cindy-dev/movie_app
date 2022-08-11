@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/data/model/toprated_movie_model.dart';
 
@@ -27,14 +28,14 @@ class TopRatedMovieError extends TopRatedMovieState {
 
 class TopRatedMovieNotifier extends StateNotifier<TopRatedMovieState> {
   final Ref ref;
-  TopRatedMovieNotifier(this.ref) : super(TopRatedMovieInitial());
+  TopRatedMovieNotifier(this.ref) : super(const TopRatedMovieInitial());
   Future<void> getMovie() async {
-    state = TopRatedMovieLoading();
+    state = const TopRatedMovieLoading();
     try {
-      final result = await ref.watch(movieApiProvider).getTopRatedMovie();
+      final result = await ref.read(movieApiProvider).getTopRatedMovie();
       state = TopRatedMovieLoaded(result);
     } catch (error) {
-      print(error);
+      debugPrint(error.toString());
       state = TopRatedMovieError(error.toString());
     }
   }

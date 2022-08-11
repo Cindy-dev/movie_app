@@ -26,11 +26,11 @@ class PopularMovieError extends PopularMovieState {
 
 class PopularMovieNotifier extends StateNotifier<PopularMovieState> {
   final Ref ref;
-  PopularMovieNotifier(this.ref) : super(PopularMovieInitial());
+  PopularMovieNotifier(this.ref) : super(const PopularMovieInitial());
   Future<void> getMovie() async {
-    state = PopularMovieLoading();
+    state = const PopularMovieLoading();
     try {
-      final result = await ref.watch(movieApiProvider).getPopularMovie();
+      final result = await ref.read(movieApiProvider).getPopularMovie();
       state = PopularMovieLoaded(result);
     } catch (error) {
       print(error);

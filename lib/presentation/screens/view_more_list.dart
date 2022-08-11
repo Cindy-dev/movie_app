@@ -47,6 +47,7 @@ class TopRatedViewMoreScreen extends ConsumerWidget {
                               .topRatedMovieModel.results[i].originalTitle,
                           overview:
                               result.topRatedMovieModel.results[i].overview,
+                          id: result.topRatedMovieModel.results[i].id,
                         ));
                   },
                   child: Card(
